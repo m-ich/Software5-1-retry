@@ -5,6 +5,7 @@ public class IntToEng {
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
         System.out.println(translateEng(input));
+        sc.close();
     }
 
     // 謨ｰ蛟､繧定恭險ｳ縺吶ｋ螟画鋤縺吶ｋ繝｡繧ｽ繝�繝�
@@ -14,44 +15,59 @@ public class IntToEng {
     	int a = n/10;
     	int b = n%10;
     	int c = n/100;
-    	int d = (n/10)%10;
+		int d = a%10;
     	int e = n%100;
     	int f = n/1000;
     	int g = (n%1000)/100;
-    	int h = (n%100)/10;
+    	int h = e/10;
     	if (val < 2) {
-    		if(n == 0) {
-    	    	x = "zero";
-    		} else {
-    		x = hitoketa(n);
-    		}
-    	}
-    	if (val == 2) {
-    		if (a == 1) {
-       			x = TenToNineteen(n);
-    		} else {
-    			if (b == 0) {
-    				x = hutaketa(a);
-    			} else {
-    				x = hutaketa(a) + " " + hitoketa(b);
-    			}
-    		}
-    	}else if(val == 3) {
-    		if (d == 1) {
-    			x = sanketa(c) + " " + TenToNineteen(e);
-    		} else {
-    			x = sanketa(c) + " " + hutaketa(d) + " " + hitoketa(b);
-    		}
-    	}else if(val == 4) {
-    		if (h == 1) {
-    			x = yonketa(f) + " " + sanketa(g) + " " + TenToNineteen(e);
-    		} else {
-    			x = yonketa(f) + " " + sanketa(g) + " " + hutaketa(h) + " " + hitoketa(b);
-    		}
+    		x = hitoketacpl(n);
+    	} else if (val == 2) {
+    		x = hutaketacpl(n, a, b);
+    	} else if(val == 3) {
+    		x = sanketacpl(b, c, d, e);
+    	} else if(val == 4) {
+    		x = yonketacpl(b, e, f, g, h);
 
     	}
         return x;
     }
+
+	public static String hitoketacpl(int n) {
+		String x;
+		if(n == 0) {
+			x = "zero";
+		} else {
+		x = hitoketa(n);
+		}
+		return x;
+	}
+
+	public static String hutaketacpl(int n, int a, int b) {
+		String x;
+		if (a == 1) {
+			x = TenToNineteen(n);
+		} else {
+			if (b == 0) {
+				x = hutaketa(a);
+			} else {
+				x = hutaketa(a) + " " + hitoketa(b);
+			}
+		}
+		return x;
+	}
+
+	public static String sanketacpl(int b, int c, int d, int e) {
+		String x;
+		x = sanketa(c) + " " + hutaketacpl(e,d,b);
+		return x;
+	}
+
+	public static String yonketacpl(int b, int e, int f, int g, int h) {
+		String x;
+		x = yonketa(f) + " " + sanketacpl(b,g,h,e);
+		return x;
+	}
 
     static String hitoketa(int n) {
     	String x = "";
