@@ -1,13 +1,13 @@
 import java.util.Scanner;
 public class IntToEng {
-    // メインメソッド
+    // 繝｡繧､繝ｳ繝｡繧ｽ繝�繝�
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
         System.out.println(translateEng(input));
     }
 
-    // 数値を英訳する変換するメソッド
+    // 謨ｰ蛟､繧定恭險ｳ縺吶ｋ螟画鋤縺吶ｋ繝｡繧ｽ繝�繝�
     static String translateEng(int n) {
     	String x = null;
     	int val = String.valueOf( n ).length();
@@ -36,6 +36,8 @@ public class IntToEng {
     				x = hutaketa(a) + " " + hitoketa(b);
     			}
     		}
+    	}else if(val == 3) {
+    		x = sanketa(c) + " " + hutaketa(a) + " " + hitoketa(b);
     	}
         return x;
     }
@@ -57,6 +59,8 @@ public class IntToEng {
 
     static String hutaketa(int n) {
     	String x = null;
+    	if (n == 0) x = "";
+    	if (n == 1) x = "";
     	if (n == 2) x = "twenty";
     	if (n == 3) x = "thirty";
     	if (n == 4) x = "fourty";
@@ -65,6 +69,16 @@ public class IntToEng {
     	if (n == 7) x = "seventy";
     	if (n == 8) x = "eighty";
     	if (n == 9) x = "ninety";
+    	return x;
+    }
+    
+    static String sanketa(int n) {
+    	String x = null;
+    	if (n == 1) {
+    		x = "one hundred";
+    	}else {
+    		x = hitoketa(n) + " hundreds";
+    	}
     	return x;
     }
 
