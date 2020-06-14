@@ -14,21 +14,14 @@ public class IntToEng {
     	int a = n/10;
     	int b = n%10;
     	int c = n/100;
+    	int d = (n/10)%10;
+    	int e = n%100;
     	if (val < 2) {
     		x = hitoketa(n);
     	}
     	if (val == 2) {
     		if (a == 1) {
-       			if (n == 10) x = "ten";
-    			if (n == 11) x = "eleven";
-    			if (n == 12) x = "twelve";
-    			if (n == 13) x = "thirteen";
-    			if (n == 14) x = "fourteen";
-    			if (n == 15) x = "fifteen";
-    			if (n == 16) x = "sixteen";
-    			if (n == 17) x = "seventeen";
-    			if (n == 18) x = "eighteen";
-    			if (n == 19) x = "nineteen";
+       			x = TenToNineteen(n);
     		} else {
     			if (b == 0) {
     				x = hutaketa(a);
@@ -37,7 +30,11 @@ public class IntToEng {
     			}
     		}
     	}else if(val == 3) {
-    		x = sanketa(c) + " " + hutaketa(a) + " " + hitoketa(b);
+    		if (d == 1) {
+    			x = sanketa(c) + " " + TenToNineteen(e);
+    		} else {
+    			x = sanketa(c) + " " + hutaketa(a) + " " + hitoketa(b);
+    		}
     	}
         return x;
     }
@@ -60,7 +57,6 @@ public class IntToEng {
     static String hutaketa(int n) {
     	String x = null;
     	if (n == 0) x = "";
-    	if (n == 1) x = "";
     	if (n == 2) x = "twenty";
     	if (n == 3) x = "thirty";
     	if (n == 4) x = "fourty";
@@ -70,6 +66,21 @@ public class IntToEng {
     	if (n == 8) x = "eighty";
     	if (n == 9) x = "ninety";
     	return x;
+    }
+    
+    static String TenToNineteen(int n) {
+    	String x = null;
+    	if (n == 10) x = "ten";
+		if (n == 11) x = "eleven";
+		if (n == 12) x = "twelve";
+		if (n == 13) x = "thirteen";
+		if (n == 14) x = "fourteen";
+		if (n == 15) x = "fifteen";
+		if (n == 16) x = "sixteen";
+		if (n == 17) x = "seventeen";
+		if (n == 18) x = "eighteen";
+		if (n == 19) x = "nineteen";
+		return x;
     }
     
     static String sanketa(int n) {
