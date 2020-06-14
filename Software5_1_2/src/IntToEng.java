@@ -17,8 +17,14 @@ public class IntToEng {
     	int d = (n/10)%10;
     	int e = n%100;
     	int f = n/1000;
+    	int g = (n%1000)/100;
+    	int h = (n%100)/10;
     	if (val < 2) {
+    		if(n == 0) {
+    	    	x = "zero";
+    		} else {
     		x = hitoketa(n);
+    		}
     	}
     	if (val == 2) {
     		if (a == 1) {
@@ -37,14 +43,19 @@ public class IntToEng {
     			x = sanketa(c) + " " + hutaketa(d) + " " + hitoketa(b);
     		}
     	}else if(val == 4) {
+    		if (h == 1) {
+    			x = yonketa(f) + " " + sanketa(g) + " " + TenToNineteen(e);
+    		} else {
+    			x = yonketa(f) + " " + sanketa(g) + " " + hutaketa(h) + " " + hitoketa(b);
+    		}
 
     	}
         return x;
     }
 
     static String hitoketa(int n) {
-    	String x = null;
-    	if (n == 0) x = "zero";
+    	String x = "";
+    	//if (n == 0) x = "zero";
     	if (n == 1) x = "one";
 		if (n == 2) x = "two";
 		if (n == 3) x = "three";
@@ -88,7 +99,11 @@ public class IntToEng {
 
     static String sanketa(int n) {
     	String x = null;
-    	x = hitoketa(n) + " hundred";
+    	if (n == 0) {
+    		x = "";
+    	} else {
+    		x = hitoketa(n) + " hundred";
+    	}
     	return x;
     }
 
